@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>折叠展示图片</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="cards-container">
+      <div class="card one"></div>
+      <div class="card two"></div>
+      <div class="card three"></div>
+      <div class="card four"></div>
+      <div class="card five"></div>
+    </div>
+  </div>
+
+  <script>
+    /*
+    逻辑：
+      1. 获取所有的 cards
+      2. 在 cards[0] 添加 active 属性
+      3. 当鼠标移动到那个上面，那个 card 添加 active class 属性
+    */
+
+    const cards = document.querySelectorAll(".card");
+    const card0 = cards[0];
+    card0.classList.add("active")
+
+    // for (let i = 0; i < cards.length; i++) {
+    //   const card = cards[i];
+    //   card.addEventListener("click", function() {
+    //     card.classList.add("active")
+    //     // TODO 循环遍历，让其他不等于 i 的的 classList 移除 active
+    //     for (let j = 0; j < cards.length; j++) {
+    //       if (i !== j) {
+    //         const card = cards[j];
+    //         card.classList.remove("active")
+    //       }
+    //     }
+    //   })
+    // }
+
+    // ! 我上面代码写的不够简洁
+
+    cards.forEach(card => {
+      card.addEventListener("click", function() {
+        removeActiveClasses()
+        card.classList.add("active")
+      })
+    })
+
+    function removeActiveClasses() {
+      cards.forEach(card => {
+        card.classList.remove("active");
+      })
+    }
+  </script>
+</body>
+
+</html>

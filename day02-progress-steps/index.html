@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>步骤条</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .steps {
+      width: 200px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      line-height: 20px;
+      text-align: center;
+      border: 2px solid #eee;
+      background-color: #fff;
+    }
+
+    .circle.active {
+      border-color: blue;
+    }
+
+    .line {
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: 4px;
+      background-color: #eee;
+      transform: translateY(-50%);
+      top: 50%;
+    }
+
+    .line-step {
+      background-color: blue;
+      height: 100%;
+      width: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="steps">
+      <div class="circle active">1</div>
+      <div class="circle">2</div>
+      <div class="circle">3</div>
+      <div class="circle">4</div>
+      <div class="line">
+        <div id="line-step" class="line-step"></div>
+      </div>
+    </div>
+    <button id="prevBtn" disabled>上一步</button>
+    <button id="nextBtn">下一步</button>
+  </div>
+
+  <script>
+
+    const circles = document.querySelectorAll(".circle");
+    // 判断有几步 因为我们是 从 0 开始
+    const steps = circles.length - 1
+
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+
+    const lineStep = document.getElementById("line-step");
+
+    let currentStep = 0;
+
+    prevBtn.addEventListener("click", function() {
+      console.log("prev")
+      currentStep -= 1
+      if (currentStep === 0) {
+        prevBtn.setAttribute("disabled", true)
+      } else {
+        prevBtn.removeAttribute("disabled")
+      }
+      if (currentStep < 0) {
+        currentStep += 1
+        return
+      }
+      lineStep.style.width = 33 * currentStep + "%"
+
+    })
+    nextBtn.addEventListener("click", function() {
+      console.log("next")
+      currentStep += 1
+      if (currentStep === steps) {
+        nextBtn.setAttribute("disabled", true)
+      } else if (currentStep === 0) {
+        prevBtn.setAttribute("disabled", true)
+      } else {
+        prevBtn.removeAttribute("disabled")
+        nextBtn.removeAttribute("disabled")
+      }
+      if (currentStep > steps) {
+        currentStep -= 1
+        return
+      }
+      lineStep.style.width = 33 * currentStep + "%"
+
+    })
+
+  </script>
+</body>
+
+</html>

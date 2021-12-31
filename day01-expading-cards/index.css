@@ -1,0 +1,83 @@
+@import url(./normalize.css);
+
+.container {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cards-container {
+  height: 80vh;
+  width: 90vw;
+  /* background-color: tomato; */
+  display: flex;
+  /* ! 这里不使用 justify-content 是因为，一旦子元素 flex: 1; 那么空隙就没有了
+    ! 所以采用了下面给每一个  card 添加 margin-right 的属性。
+  */
+  /* justify-content: space-between; */
+}
+
+.cards-container > .card {
+  height: 100%;
+  /* width: 120px; */
+  /* 老师这里 flex 用的 0.5 */
+  flex: 0.5;
+  border-radius: 40px;
+  background-color: aqua;
+  /* ! 解决 space-between 当子元素 flex:1; 时没有空隙的问题。使用 margin-right */
+  margin: 10px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background-size: auto 100%; */
+  background-size: cover;
+  transition: all 0.4s ease-in-out;
+}
+
+.remove-pointer-events {
+  pointer-events: none;
+}
+
+.cards-container > .card:last-child {
+  margin-right: 0;
+}
+
+.cards-container > .card.active {
+  flex: 10;
+}
+
+.one {
+  background-image: url(./imgs/1.webp);
+}
+
+.two {
+  background-image: url(./imgs/2.webp);
+}
+
+.three {
+  background-image: url(./imgs/3.webp);
+}
+
+.four {
+  background-image: url(./imgs/4.webp);
+}
+
+.five {
+  background-image: url(./imgs/5.webp);
+}
+
+/* 当屏幕宽度小于 480px 的时候 */
+@media (max-width: 480px) {
+  .cards-container {
+    width: 100vw;
+  }
+  .card:nth-of-type(4),
+  .card:nth-of-type(5) {
+    display: none;
+  }
+  .cards-container > .card {
+    width: 40px;
+  }
+}
